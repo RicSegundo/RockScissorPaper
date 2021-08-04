@@ -2,38 +2,32 @@ import random
 
 #   Add initial functions, for Win, Tie and Loss
 
-def Win(player_score, opponent_score):
+def Win(player_score: int, opponent_score: int, game: bool = True, user_input: str = None):
     player_score += 1
     response = input(f"Truth has prevailed, and the strongest has won!\nWould you like to play again? (Yes/No)\nThe current score is Tio Ricardo: {player_score} - {opponent_score} Henrique\n")
     if response == 'No':
         game = False
-        user_input = None
     else:
         user_input = input("> Please choose one among Rock, Scissors and Paper: ")
-        game = True
     return player_score, game, user_input
 
 
-def Loss(player_score, opponent_score):
+def Loss(player_score: int, opponent_score: int, game: bool = True, user_input: str = None):
     opponent_score += 1
     response = input(f"Alas, a lucky stroke! You have won this battle, but not the war!\nWould you like to play again? (Yes/No)\nThe current score is Tio Ricardo: {player_score} - {opponent_score} Henrique\n")
     if response == 'No':
         game = False
-        user_input = None
     else:
         user_input = input("> Please choose one among Rock, Scissors and Paper: ")
-        game = True
     return opponent_score, game, user_input
 
 
-def Tie(player_score, opponent_score):
+def Tie(player_score: int, opponent_score: int, game: bool = True, user_input: str = None):
     response = input(f"> Ahhh, what an unfortunate tie!\nWould you like to play again? (Yes/No)\nThe current score is Tio Ricardo: {player_score} - {opponent_score} Henrique\n")
     if response == 'No':
         game = False
-        user_input = None
     else:
         user_input = input("> Please choose one among Rock, Scissors and Paper: ")
-        game = True
     return game, user_input
 
 
