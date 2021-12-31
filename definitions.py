@@ -1,65 +1,68 @@
 import enum
-from typing import NamedTuple
+import time
+from typing import List
 
 
 class Players(str, enum.Enum):
     """
     Contains the player's names
     """
-    player = 'Ricardo'
-    opponent = 'Henrique'
+    player      = 'Ricardo'
+    opponent    = 'Henrique'
 
 
-class Weapons(str, enum.Enum):
+class Weapon():
+    """Generates the objects for all possible weapons,
+    with the __gt__ method allowing for the comparison
+
+    Args:
+        name (str): chosen weapon
+        beats (list): list of weapons it beats
+    """
+    def __init__(self, name:str, beats:List = []):
+        self.name = name
+        self.beats = beats
+
+    def __gt__(self, other:str) -> bool:
+        if other.name in self.beats:
+            return 'win'
+        elif self.name == other.name:
+            return 'tie'
+        else:
+            return 'loss'
+
+
+## Implement unit tests for the game and functions
+
+#   Define the Weapons objects
+"""A Simple Way to Remember Who Wins
+Scissors cuts paper. 
+Paper covers rock.
+Rock crushes lizard. 
+Lizard poisons Spock. 
+Spock smashes scissors. 
+Scissors decapitates lizard.
+Lizard eats paper. 
+Paper disproves Spock.
+Spock vaporizes rock. 
+Rock crushes scissors.
+"""
+rock        = Weapon('rock', ['scissors', 'lizard'])
+scissors    = Weapon('scissors', ['paper', 'lizard'])
+paper       = Weapon('paper', ['rock', 'spock'])
+spock       = Weapon('spock', ['scissors', 'rock'])
+lizard      = Weapon('lizard', ['spock', 'paper'])
+
+
+class Weapons(enum.Enum):
     """
     Contains all possible weapons to choose from
-    These must be placed in order of "strength", meaning the
-    first one defeats the second, etc.
     """
-    Rock        = 'Rock'
-    Scissors    = 'Scissors'
-    Paper       = 'Paper'
-
-
-# Define all possible name combinations that would represent a win, tie or loss
-# This is useful if we want to extend the game to more weapons
-# weapons = [weapon.name for weapon in Weapons]
-
-# possible_outcomes = {}
-
-# for ind, weapon in enumerate(weapons):
-#     win_player = weapon + weapons[(ind+1) % len(weapons)]
-#     possible_outcomes[win_player] = 'win'
-#     tie_player = weapon + weapon
-#     possible_outcomes[tie_player] = 'tie'
-#     loss_player = weapon + weapons[ind-1]
-#     possible_outcomes[loss_player] = 'loss'
-
-# Possibilities = enum.Enum('Possibilities', possible_outcomes)
-
-
-class Possibilities(str, enum.Enum):
-    """
-    Contains all the possible combination of "fights" and it's outcome
-    """
-    RockScissors        = 'win'
-    ScissorsPaper       = 'win'
-    PaperRock           = 'win'
-    RockRock            = 'tie'
-    ScissorsScissors    = 'tie'
-    PaperPaper          = 'tie'
-    ScissorsRock        = 'loss'
-    PaperScissors       = 'loss'
-    RockPaper           = 'loss'
-
-
-class OutcomeGenerator(NamedTuple):
-    outcome: str
-    """
-    Generates an action (Win, Tie, Lose) with the possible results
-    Args:
-        outcome (str): game result
-    """
+    rock        = rock
+    scissors    = scissors
+    paper       = paper
+    spock       = spock
+    lizard      = lizard
 
 
 class Replies(str, enum.Enum):
@@ -78,5 +81,12 @@ class Replies(str, enum.Enum):
 
     current_score   = "The current score is"
     status          = "Would you like to play again? (Yes/No)"
+    wrong_status    = "This choice doesn't exist warrior, you need to choose Yes or No !"
     final           = "Well, it seems that this game has ended!\nThe final score is"
+
+
+#   define a printing function that slowly outputs the text
+def print_slowly(text:str, line_break_delay:float = 1.5) -> None:
+    print(text)
+    time.sleep(line_break_delay)
 

@@ -10,7 +10,7 @@ def game_engine(opponent:str = P.opponent):
     weapons = [weapon.name for weapon in W]
 
     instance = F.Game(opponent = opponent, weapons = weapons)
-    player_final_score, opponent_final_score = instance.Play()
+    player_final_score, opponent_final_score = instance.play()
 
     print(f"{R.final} {P.player} {player_final_score} - {opponent_final_score} {opponent}")
 

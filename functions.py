@@ -1,6 +1,6 @@
-from definitions import Possibilities as Pb, Players as P, Replies as R
 from typing import List
 import random
+from definitions import Weapons as W, Players as P, Replies as R, print_slowly
 
 class Game():
     """Runs a game of Rock, Scissors, Paper
@@ -23,38 +23,39 @@ class Game():
         self.weapons:List = weapons
 
     #   Main function of the game
-    def Play(self):
+    def play(self):
         while self.game == True:
-            self.Weapons()
-            outcome = self.Compute_outcome()
-            self.Compute_score(outcome)
-            self.Output_score()
-            self.Continuity()
+            self.player_weapons()
+            outcome = self.compute_outcome()
+            self.compute_score(outcome)
+            self.output_score()
+            self.continuity()
             
         return self.player_score, self.opponent_score
 
     #   Choose players weapon and announce the "battle"
-    def Weapons(self):
-        self.opponent_weapon = input(f"> {self.opponent}, {R.continuation} {', '.join(self.weapons)}: ")
-        self.Check_validity()
-        print(f"You have chosen {self.opponent_weapon} as the weapon to accompany you in battle!")
+    def player_weapons(self):
+        self.opponent_weapon = input(f"> {self.opponent}, {R.continuation} {', '.join(map(str.capitalize, self.weapons))}:\n").lower()
+        self.check_validity()
+        print_slowly(f"You have chosen {self.opponent_weapon.capitalize()} as the weapon to accompany you in battle!")
         self.player_weapon = random.choice(self.weapons)
-        print(f"{self.player} chooses the mightiest of weapons, {self.player_weapon}!")
+        print_slowly(f"{self.player} chooses the mightiest of weapons, {self.player_weapon.capitalize()}!")
 
     #   Check if the chosen weapon is a valid weapon
-    def Check_validity(self):
+    def check_validity(self):
         while self.opponent_weapon not in self.weapons:
-            self.opponent_weapon = input(f"> {R.wrong_weapon} ")
+            self.opponent_weapon = input(f"> {R.wrong_weapon}\n")
 
     #   Function to decide the outcome
-    def Compute_outcome(self) -> str:
-        result = ''.join([self.player_weapon, self.opponent_weapon])
-        outcome = Pb[result].value
-        print(f"{R[outcome].value}")
+    def compute_outcome(self) -> str:
+        player_weapon = W[self.player_weapon].value
+        opponent_weapon = W[self.opponent_weapon].value
+        outcome = player_weapon > opponent_weapon
+        print_slowly(f"{R[outcome].value}")
         return outcome
 
     #   Function to adjust score for Win, Tie and Loss
-    def Compute_score(self, outcome:str) -> None:
+    def compute_score(self, outcome:str) -> None:
         if outcome == 'win':
             self.player_score += 1
         elif outcome == 'loss':
@@ -62,13 +63,15 @@ class Game():
         else:
             pass
 
-    #   Function to print current score
-    def Output_score(self) -> None:
-        print(f"{R.current_score} {self.player}: {self.player_score} - {self.opponent_score} {self.opponent}")
+    #   Function to print_slowly current score
+    def output_score(self) -> None:
+        print_slowly(f"{R.current_score} {self.player}: {self.player_score} - {self.opponent_score} {self.opponent}")
     
     #   Check if the game continues
-    def Continuity(self) -> None:
-        response = input(f"{R.status}")
-        if response == 'No':
+    def continuity(self) -> None:
+        response = input(f"{R.status}\n").lower()
+        while response not in ['yes', 'no']:
+            response = input(f"{R.wrong_status}\n").lower()
+        if response == 'no':
             self.game = False
 
