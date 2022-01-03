@@ -33,6 +33,7 @@ class Weapon():
 
 
 ## Implement unit tests for the game and functions
+## Define return on every function
 
 #   Define the Weapons objects
 """A Simple Way to Remember Who Wins
@@ -47,14 +48,23 @@ Paper disproves Spock.
 Spock vaporizes rock. 
 Rock crushes scissors.
 """
-rock        = Weapon('rock', ['scissors', 'lizard'])
-scissors    = Weapon('scissors', ['paper', 'lizard'])
-paper       = Weapon('paper', ['rock', 'spock'])
-spock       = Weapon('spock', ['scissors', 'rock'])
-lizard      = Weapon('lizard', ['spock', 'paper'])
+rock:object     = Weapon('rock', ['scissors', 'lizard'])
+scissors:object = Weapon('scissors', ['paper', 'lizard'])
+paper:object    = Weapon('paper', ['rock', 'spock'])
+spock:object    = Weapon('spock', ['scissors', 'rock'])
+lizard:object   = Weapon('lizard', ['spock', 'paper'])
 
 
-class Weapons(enum.Enum):
+class NoValue(enum.Enum):
+    """
+    Added to comply with the documentation when passing objects as values
+    onto an enumerator:
+    https://docs.python.org/3/library/enum.html#using-object
+    """
+    def __repr__(self):
+        return '<%s.%s>' % (self.__class__.__name__, self.name)
+
+class Weapons(NoValue, enum.Enum):
     """
     Contains all possible weapons to choose from
     """
@@ -87,6 +97,13 @@ class Replies(str, enum.Enum):
 
 #   define a printing function that slowly outputs the text
 def print_slowly(text:str, line_break_delay:float = 1.5) -> None:
+    """Function to reduce the speed when multiple text blocks are printed
+    Introduces a delay after printing each text
+
+    Args:
+        text (str): sentence to be printed
+        line_break_delay (float, optional): Delay after printing the text. Defaults to 1.5 seconds.
+    """
     print(text)
     time.sleep(line_break_delay)
 

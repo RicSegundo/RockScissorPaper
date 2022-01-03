@@ -1,9 +1,9 @@
-from typing import List
+from typing import List, Tuple
 import random
 from definitions import Weapons as W, Players as P, Replies as R, print_slowly
 
 class Game():
-    """Runs a game of Rock, Scissors, Paper
+    """Runs a game of Rock, Scissors, Paper, Spock, Lizard
     """
 
     def __init__(self,
@@ -23,7 +23,7 @@ class Game():
         self.weapons:List = weapons
 
     #   Main function of the game
-    def play(self):
+    def play(self) -> Tuple[int, int]:
         while self.game == True:
             self.player_weapons()
             outcome = self.compute_outcome()
@@ -34,7 +34,7 @@ class Game():
         return self.player_score, self.opponent_score
 
     #   Choose players weapon and announce the "battle"
-    def player_weapons(self):
+    def player_weapons(self) -> None:
         self.opponent_weapon = input(f"> {self.opponent}, {R.continuation} {', '.join(map(str.capitalize, self.weapons))}:\n").lower()
         self.check_validity()
         print_slowly(f"You have chosen {self.opponent_weapon.capitalize()} as the weapon to accompany you in battle!")
@@ -42,7 +42,7 @@ class Game():
         print_slowly(f"{self.player} chooses the mightiest of weapons, {self.player_weapon.capitalize()}!")
 
     #   Check if the chosen weapon is a valid weapon
-    def check_validity(self):
+    def check_validity(self) -> None:
         while self.opponent_weapon not in self.weapons:
             self.opponent_weapon = input(f"> {R.wrong_weapon}\n")
 
