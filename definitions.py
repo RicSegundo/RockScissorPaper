@@ -19,11 +19,13 @@ class Weapon():
         name (str): chosen weapon
         beats (list): list of weapons it beats
     """
-    def __init__(self, name:str, beats:List = []):
+    def __init__(self, name:str, beats:List = None):
+        if beats is None:
+            beats = []
         self.name = name
         self.beats = beats
 
-    def __gt__(self, other:str) -> bool:
+    def __gt__(self, other:str) -> str:
         if other.name in self.beats:
             return 'win'
         elif self.name == other.name:
@@ -86,7 +88,7 @@ class Replies(str, enum.Enum):
     wrong_weapon    = "Are you sure about that choice?\nPlease select one among the possible 'weapons' listed above:"
 
     win             = "Truth has prevailed, and the strongest has won!"
-    tie             = "Ahhh, what an unfortunate tie"
+    tie             = "Ah, what an unfortunate tie"
     loss            = "Alas, a lucky stroke! You have won this battle, but not the war!"
 
     current_score   = "The current score is"
