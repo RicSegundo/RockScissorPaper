@@ -2,15 +2,22 @@ from typing import List, Tuple
 import random
 from definitions import Weapons as W, Players as P, Replies as R, print_slowly
 
+
 class Game():
     """Runs a game of Rock, Scissors, Paper, Spock, Lizard
+    
+    Args:
+        opponent (str): name of the opponent (optional)
+
+    Returns:
+        object: instance of a game of Rock, Scissors, Paper, Spock, Lizard
     """
 
     def __init__(self,
     opponent:str,
     player_score:int = 0,
     opponent_score:int = 0,
-    game:bool = True,
+    game_on:bool = True,
     weapons:List = []
     ) -> None:
         self.player:str = P.player
@@ -19,12 +26,12 @@ class Game():
         self.opponent_weapon:str = random.choice(weapons)
         self.player_score:int = player_score
         self.opponent_score:int = opponent_score
-        self.game:bool = game
+        self.game_on:bool = game_on
         self.weapons:List = weapons
 
     #   Main function of the game
     def play(self) -> Tuple[int, int]:
-        while self.game == True:
+        while self.game_on == True:
             self.player_weapons()
             outcome = self.compute_outcome()
             self.compute_score(outcome)
@@ -60,8 +67,6 @@ class Game():
             self.player_score += 1
         elif outcome == 'loss':
             self.opponent_score += 1
-        else:
-            pass
 
     #   Function to print_slowly current score
     def output_score(self) -> None:
@@ -73,5 +78,5 @@ class Game():
         while response not in ['yes', 'no']:
             response = input(f"{R.wrong_status}\n").lower()
         if response == 'no':
-            self.game = False
+            self.game_on = False
 
