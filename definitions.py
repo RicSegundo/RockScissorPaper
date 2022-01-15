@@ -21,7 +21,7 @@ class Weapon():
     """
     def __init__(self, name:str, beats:List = None):
         if beats is None:
-            beats = []
+            beats = list()
         self.name = name
         self.beats = beats
 
