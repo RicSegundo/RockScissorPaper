@@ -19,13 +19,13 @@ class Weapon():
         name (str): chosen weapon
         beats (list): list of weapons it beats
     """
-    def __init__(self, name:str, beats:List = None):
+    def __init__(self, name: str, beats: List = None):
         if beats is None:
             beats = list()
         self.name = name
         self.beats = beats
 
-    def __gt__(self, other:str) -> str:
+    def __gt__(self, other: str) -> str:
         if other.name in self.beats:
             return 'win'
         elif self.name == other.name:
@@ -50,11 +50,11 @@ Paper disproves Spock.
 Spock vaporizes rock. 
 Rock crushes scissors.
 """
-rock:object     = Weapon('rock', ['scissors', 'lizard'])
-scissors:object = Weapon('scissors', ['paper', 'lizard'])
-paper:object    = Weapon('paper', ['rock', 'spock'])
-spock:object    = Weapon('spock', ['scissors', 'rock'])
-lizard:object   = Weapon('lizard', ['spock', 'paper'])
+rock: object     = Weapon('rock', ['scissors', 'lizard'])
+scissors: object = Weapon('scissors', ['paper', 'lizard'])
+paper: object    = Weapon('paper', ['rock', 'spock'])
+spock: object    = Weapon('spock', ['scissors', 'rock'])
+lizard: object   = Weapon('lizard', ['spock', 'paper'])
 
 
 class NoValue(enum.Enum):
@@ -98,7 +98,7 @@ class Replies(str, enum.Enum):
 
 
 #   define a printing function that slowly outputs the text
-def print_slowly(text:str, line_break_delay:float = 1.5) -> None:
+def print_slowly(text: str, line_break_delay: float = 1.5) -> None:
     """Function to reduce the speed when multiple text blocks are printed
     Introduces a delay after printing each text
 

@@ -5,31 +5,29 @@ from definitions import Weapons as W, Players as P, Replies as R, print_slowly
 
 class Game():
     """Runs a game of Rock, Scissors, Paper, Spock, Lizard
-    
     Args:
         opponent (str): name of the opponent (optional)
-
     Returns:
         object: instance of a game of Rock, Scissors, Paper, Spock, Lizard
     """
-
+    
     def __init__(self,
-    opponent:str,
-    player_score:int = 0,
-    opponent_score:int = 0,
-    game_on:bool = True,
-    weapons:List = None
+    opponent: str,
+    player_score: int = 0,
+    opponent_score: int = 0,
+    game_on: bool = True,
+    weapons: List = None
     ) -> None:
         if weapons is None:
             weapons = list()
-        self.player:str = P.player
-        self.player_weapon:str = random.choice(weapons)
-        self.opponent:str = opponent
-        self.opponent_weapon:str = random.choice(weapons)
-        self.player_score:int = player_score
-        self.opponent_score:int = opponent_score
-        self.game_on:bool = game_on
-        self.weapons:List = weapons
+        self.player: str = P.player
+        self.player_weapon: str = random.choice(weapons)
+        self.opponent: str = opponent
+        self.opponent_weapon: str = random.choice(weapons)
+        self.player_score: int = player_score
+        self.opponent_score: int = opponent_score
+        self.game_on: bool = game_on
+        self.weapons: List = weapons
 
     #   Main function of the game
     def play(self) -> Tuple[int, int]:
@@ -64,7 +62,7 @@ class Game():
         return outcome
 
     #   Function to adjust score for Win, Tie and Loss
-    def compute_score(self, outcome:str) -> None:
+    def compute_score(self, outcome: str) -> None:
         if outcome == 'win':
             self.player_score += 1
         elif outcome == 'loss':
