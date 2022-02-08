@@ -1,6 +1,7 @@
 import enum
 import time
 from typing import List
+from dataclasses import dataclass
 
 
 class Players(str, enum.Enum):
@@ -11,6 +12,7 @@ class Players(str, enum.Enum):
     opponent    = 'Henrique'
 
 
+@dataclass
 class Weapon():
     """Generates the objects for all possible weapons,
     with the __gt__ method allowing for the comparison
@@ -19,11 +21,8 @@ class Weapon():
         name (str): chosen weapon
         beats (list): list of weapons it beats
     """
-    def __init__(self, name: str, beats: List = None):
-        if beats is None:
-            beats = list()
-        self.name = name
-        self.beats = beats
+    name: str
+    beats: List
 
     def __gt__(self, other: str) -> str:
         if other.name in self.beats:
