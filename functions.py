@@ -51,7 +51,7 @@ class Game():
     #   Check if the chosen weapon is a valid weapon
     def check_validity(self) -> None:
         while self.opponent_weapon not in self.weapons:
-            self.opponent_weapon = input(f"> {R.wrong_weapon}\n")
+            self.opponent_weapon = input(f"> {R.wrong_weapon}\n").lower()
 
     #   Function to decide the outcome
     def compute_outcome(self) -> str:
