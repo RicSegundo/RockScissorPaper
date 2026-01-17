@@ -22,10 +22,10 @@ class Weapon():
 
     Args:
         name (str): chosen weapon
-        beats (list): list of weapons it beats
+        beats (List[str]): list of weapons it beats
     """
     name: str
-    beats: List
+    beats: List[str]
 
     def __gt__(self, other: 'Weapon') -> str:
         if other.name in self.beats:
@@ -52,11 +52,11 @@ Paper disproves Spock.
 Spock vaporizes rock. 
 Rock crushes scissors.
 """
-rock: object     = Weapon('rock', ['scissors', 'lizard'])
-scissors: object = Weapon('scissors', ['paper', 'lizard'])
-paper: object    = Weapon('paper', ['rock', 'spock'])
-spock: object    = Weapon('spock', ['scissors', 'rock'])
-lizard: object   = Weapon('lizard', ['spock', 'paper'])
+rock: Weapon     = Weapon('rock', ['scissors', 'lizard'])
+scissors: Weapon = Weapon('scissors', ['paper', 'lizard'])
+paper: Weapon    = Weapon('paper', ['rock', 'spock'])
+spock: Weapon    = Weapon('spock', ['scissors', 'rock'])
+lizard: Weapon   = Weapon('lizard', ['spock', 'paper'])
 
 
 class NoValue(enum.Enum):

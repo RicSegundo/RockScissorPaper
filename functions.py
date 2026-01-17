@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 import random
 from definitions import Weapons as W, Players as P, Replies as R, print_slowly
 
@@ -16,22 +16,25 @@ class Game():
     player_score: int = 0,
     opponent_score: int = 0,
     game_on: bool = True,
-    weapons: List[str] = []
+    weapons: Optional[List[str]] = None
     ) -> None:
-        if weapons == []:
+        if weapons is None:
             weapons = []
-        self.player: str = P.player
+        if not weapons:
+            raise ValueError("weapons list cannot be empty")
+
+        self.player: str = str(P.player)
         self.player_weapon: str = random.choice(weapons)
         self.opponent: str = opponent
         self.opponent_weapon: str = random.choice(weapons)
         self.player_score: int = player_score
         self.opponent_score: int = opponent_score
         self.game_on: bool = game_on
-        self.weapons: List = weapons
+        self.weapons: List[str] = weapons
 
     #   Main function of the game
     def play(self) -> Tuple[int, int]:
-        while self.game_on == True:
+        while self.game_on:
             self.player_weapons()
             outcome = self.compute_outcome()
             self.compute_score(outcome)
@@ -58,7 +61,7 @@ class Game():
         player_weapon = W[self.player_weapon].value
         opponent_weapon = W[self.opponent_weapon].value
         outcome = player_weapon > opponent_weapon
-        print_slowly(f"{R[outcome].value}")
+        print_slowly(str(R[outcome]))
         return outcome
 
     #   Function to adjust score for Win, Tie and Loss
