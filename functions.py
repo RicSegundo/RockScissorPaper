@@ -16,10 +16,10 @@ class Game():
     player_score: int = 0,
     opponent_score: int = 0,
     game_on: bool = True,
-    weapons: List = None
+    weapons: List[str] = []
     ) -> None:
-        if weapons is None:
-            weapons = list()
+        if weapons == []:
+            weapons = []
         self.player: str = P.player
         self.player_weapon: str = random.choice(weapons)
         self.opponent: str = opponent

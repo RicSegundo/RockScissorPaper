@@ -9,7 +9,10 @@ class Players(str, enum.Enum):
     Contains the player's names
     """
     player      = 'Ricardo'
-    opponent    = 'Henrique'
+    opponent    = 'Luís'
+    
+    def __str__(self) -> str:
+        return self.value
 
 
 @dataclass
@@ -24,7 +27,7 @@ class Weapon():
     name: str
     beats: List
 
-    def __gt__(self, other: str) -> str:
+    def __gt__(self, other: 'Weapon') -> str:
         if other.name in self.beats:
             return 'win'
         elif self.name == other.name:
@@ -74,6 +77,9 @@ class Weapons(NoValue, enum.Enum):
     paper       = paper
     spock       = spock
     lizard      = lizard
+    
+    def __str__(self) -> str:
+        return self.name
 
 
 class Replies(str, enum.Enum):
@@ -94,6 +100,9 @@ class Replies(str, enum.Enum):
     status          = "Would you like to play again? (Yes/No)"
     wrong_status    = "This choice doesn't exist warrior, you need to choose Yes or No !"
     final           = "Well, it seems that this game has ended!\nThe final score is"
+    
+    def __str__(self) -> str:
+        return self.value
 
 
 #   define a printing function that slowly outputs the text
